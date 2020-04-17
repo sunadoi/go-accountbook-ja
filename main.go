@@ -2,17 +2,27 @@ package main
 
 import "fmt"
 
+type Item struct{
+	category string
+	price int
+}
+
 func main() {
-	var category string
-	var price int
+	item := inputItem()
+
+	fmt.Println("======================")
+	fmt.Printf("%sに%d円使いました\n", item.category, item.price)
+	fmt.Println("======================")
+}
+
+func inputItem() Item {
+	var item Item
 
 	fmt.Print("品目>")
-	fmt.Scan(&category)
+	fmt.Scan(&item.category)
 
 	fmt.Print("値段>")
-	fmt.Scan(&price)
+	fmt.Scan(&item.price)
 
-	fmt.Println("======================")
-	fmt.Printf("%sに%d円使いました\n", category, price)
-	fmt.Println("======================")
+	return item
 }
