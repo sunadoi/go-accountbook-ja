@@ -8,14 +8,21 @@ type Item struct{
 }
 
 func main() {
-	item := inputItem()
+	var n int
+	fmt.Print("データの数を入力してください>")
+	fmt.Scan(&n)
 
-	fmt.Println("======================")
-	fmt.Printf("%sに%d円使いました\n", item.category, item.price)
-	fmt.Println("======================")
+	items := make([]Item, 0, n)
+
+
+	for i := 0; i < cap(items); i++ {
+		items = inputItem(items)
+	}
+
+	showItems(items)
 }
 
-func inputItem() Item {
+func inputItem(items []Item) []Item {
 	var item Item
 
 	fmt.Print("品目>")
@@ -24,5 +31,15 @@ func inputItem() Item {
 	fmt.Print("値段>")
 	fmt.Scan(&item.price)
 
-	return item
+	items = append(items, item)
+
+	return items
+}
+
+func showItems(items []Item) {
+	fmt.Println("======================")
+	for i := 0; i < len(items); i++ {
+		fmt.Printf("%sに%d円使いました\n", items[i].category, items[i].price)
+	}
+	fmt.Println("======================")
 }
